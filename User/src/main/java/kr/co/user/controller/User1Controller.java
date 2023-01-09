@@ -29,11 +29,9 @@ public class User1Controller {
 	public String register() {
 		return "/user1/register";
 	}
-	
 	@PostMapping("/register")
 	public String register(User1VO vo) {
 		service.insertUser1(vo);
-		
 		return "redirect:/user1/list";
 	}
 	
@@ -43,4 +41,16 @@ public class User1Controller {
 		model.addAttribute("user", user);
 		return "/user1/modify";
 	}
+	@PostMapping("/modify")
+	public String modify(User1VO vo) {
+		service.updateUser1(vo);
+		return "redirect:/user1/list";
+	}
+	
+	@GetMapping("/delete")
+	public String delete(String uid) {
+		service.deleteUser1(uid);
+		return "redirect:/user1/list";
+	}
+	
 }
