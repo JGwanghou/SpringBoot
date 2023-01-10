@@ -19,10 +19,10 @@
 		</tr>
 	
 		<tr th:each="user:${users}">
-			<td>[[${user.uid}]]</td>
-			<td>[[${user.name}]]</td>
-			<td>[[${user.hp}]]</td>
-			<td>[[${user.age}]]</td>
+			<td th:text="${user.uid}"></td>
+			<td th:text="${user.name}"></td>
+			<td th:text="${user.hp}"></td>
+			<td th:text="${user.age}"></td>
 			<td>
 				<a th:href="@{/user1/modify(uid = ${user.uid})}">수정</a>
 				<a th:href="@{/user1/delete(uid = ${user.uid})}">삭제</a>
