@@ -28,7 +28,7 @@ public class MainController {
 	}
 	@GetMapping("/query2")
 	public String query2() {
-		List<User1VO> vo = repo.findUser1VOByName("a101");
+		List<User1VO> vo = repo.findUser1VOByName("A101");
 		System.out.println("query2 결과 " + vo);
 		return "redirect:/";
 	}
@@ -40,8 +40,8 @@ public class MainController {
 	}
 	@GetMapping("/query4")
 	public String query4() {
-		User1VO vo = repo.findUser1VOByUidAndName("a101", "김유신");
-		System.out.println("query3 결과 " + vo);
+		User1VO vo = repo.findUser1VOByUidAndName("a103", "김순신");
+		System.out.println("query4 결과 " + vo);
 		return "redirect:/";
 	}
 	@GetMapping("/query5")
@@ -82,7 +82,7 @@ public class MainController {
 	}
 	@GetMapping("/query11")
 	public String query11() {
-		List<User1VO> vo = repo.findUser1VOByNameContains("이");
+		List<User1VO> vo = repo.findUser1VOByNameContains("김");
 		System.out.println("query11 결과 " + vo);
 		return "redirect:/";
 	}
@@ -100,56 +100,56 @@ public class MainController {
 	}
 	@GetMapping("/query14")
 	public String query14() {
-		List<User1VO> vo = repo.findUser1VOByAgeOrderByNameAsc("김유신");
+		List<User1VO> vo = repo.findUser1VOByOrderByNameAsc();
 		System.out.println("query14 결과 " + vo);
 		return "redirect:/";
 	}
-//	@GetMapping("/query15")
-//	public String query15() {
-//		List<User1VO> vo = repo.findUser1VOByNameNot("김유신");
-//		System.out.println("query3 결과 " + vo);
-//		return "redirect:/";
-//	}
-//	@GetMapping("/query16")
-//	public String query16() {
-//		List<User1VO> vo = repo.findUser1VOByNameNot("김유신");
-//		System.out.println("query3 결과 " + vo);
-//		return "redirect:/";
-//	}
-//	@GetMapping("/query17")
-//	public String query17() {
-//		List<User1VO> vo = repo.findUser1VOByNameNot("김유신");
-//		System.out.println("query3 결과 " + vo);
-//		return "redirect:/";
-//	}
-//	@GetMapping("/query18")
-//	public String query18() {
-//		List<User1VO> vo = repo.findUser1VOByNameNot("김유신");
-//		System.out.println("query3 결과 " + vo);
-//		return "redirect:/";
-//	}
-//	@GetMapping("/query19")
-//	public String query19() {
-//		List<User1VO> vo = repo.findUser1VOByNameNot("김유신");
-//		System.out.println("query3 결과 " + vo);
-//		return "redirect:/";
-//	}
-//	@GetMapping("/query20")
-//	public String query20() {
-//		List<User1VO> vo = repo.findUser1VOByNameNot("김유신");
-//		System.out.println("query3 결과 " + vo);
-//		return "redirect:/";
-//	}
-//	@GetMapping("/query21")
-//	public String query21() {
-//		List<User1VO> vo = repo.findUser1VOByNameNot("김유신");
-//		System.out.println("query3 결과 " + vo);
-//		return "redirect:/";
-//	}
-//	@GetMapping("/query22")
-//	public String query22() {
-//		List<User1VO> vo = repo.findUser1VOByNameNot("김유신");
-//		System.out.println("query3 결과 " + vo);
-//		return "redirect:/";
-//	}
+	@GetMapping("/query15")
+	public String query15() {
+		List<User1VO> vo = repo.findUser1VOByOrderByAgeAsc();
+		System.out.println("query15 결과 " + vo);
+		return "redirect:/";
+	}
+	@GetMapping("/query16")
+	public String query16() {
+		List<User1VO> vo = repo.findUser1VOByOrderByAgeDesc();
+		System.out.println("query16 결과 " + vo);
+		return "redirect:/";
+	}
+	@GetMapping("/query17")
+	public String query17() {
+		List<User1VO> vo = repo.findUser1VOByAgeGreaterThanOrderByAgeDesc(23);
+		System.out.println("query17 결과 " + vo);
+		return "redirect:/";
+	}
+	@GetMapping("/query18")
+	public String query18() {
+		int vo = repo.countUser1VOByUid("a102");
+		System.out.println("query18 결과 " + vo);
+		return "redirect:/";
+	}
+	@GetMapping("/query19")
+	public String query19() {
+		int vo = repo.countUser1VOByName("장보고");
+		System.out.println("query19 결과 " + vo);
+		return "redirect:/";
+	}
+	@GetMapping("/query20")
+	public String query20() {
+		List<User1VO> vo = repo.selectUserUnderAge30();
+		System.out.println("query20 결과 " + vo);
+		return "redirect:/";
+	}
+	@GetMapping("/query21")
+	public String query21() {
+		List<User1VO> vo = repo.selectUserByName("장보고");
+		System.out.println("query21 결과 " + vo);
+		return "redirect:/";
+	}
+	@GetMapping("/query22")
+	public String query22() {
+		List<User1VO> vo = repo.selectUserByNameWithParam("유재미");
+		System.out.println("query22 결과 " + vo);
+		return "redirect:/";
+	}
 }

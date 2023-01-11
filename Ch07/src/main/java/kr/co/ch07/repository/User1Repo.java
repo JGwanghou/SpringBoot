@@ -31,9 +31,9 @@ public interface User1Repo extends JpaRepository<User1VO, String>{
 	public List<User1VO> findUser1VOByNameEndsWith(String name); // __name
 	
 	// 정렬
-	public List<User1VO> findUser1VOByAgeOrderByNameAsc(String name);
-	public List<User1VO> findUser1VOByNameOrderByAgeAsc(int age);
-	public List<User1VO> findUser1VOByNameOrderByAgeDesc(int age);
+	public List<User1VO> findUser1VOByOrderByNameAsc();
+	public List<User1VO> findUser1VOByOrderByAgeAsc();
+	public List<User1VO> findUser1VOByOrderByAgeDesc();
 	public List<User1VO> findUser1VOByAgeGreaterThanOrderByAgeDesc(int age);
 	
 	// 카운트

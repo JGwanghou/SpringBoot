@@ -5,30 +5,34 @@
 		<title>user4 :: modify</title>
 	</head>
 <body>
-	<h1>user3 수정</h1>
-	<a href="@{/}">Ch07 메인</a>
-	<a href="@{/user4/list}">user3 목록</a>
+	<h1>user4 수정</h1>
+	<a th:href="@{/}">Ch07 메인</a>
+	<a th:href="@{/user4/list}">user4 목록</a>
 	
 	<form th:action="@{/user4/modify}" method="post">
+	<input type="hidden" name="seq" th:value="${user.seq}"/>
 		<table border="1">
-			<tr>
-				<td>아이디</td>
-				<td><input type="text" name="uid" th:value="${user.uid}" readonly/></td>
-			</tr>
 			<tr>
 				<td>이름</td>
 				<td><input type="text" name="name" th:value="${user.name}"/></td>
 			</tr>
 			<tr>
-				<td>휴대폰</td>
-				<td><input type="text" name="hp" th:value="${user.hp}"/></td>
+				<td>성별</td>
+				<td>
+					<label><input type="radio" name="gender" value="1" th:checked="${user.gender == 1}" />남</label>
+					<label><input type="radio" name="gender" value="2" th:checked="${user.gender == 2}" />여</label>
+				</td>
 			</tr>
 			<tr>
 				<td>나이</td>
-				<td><input type="number" name="age" th:value="${user.age}" /></td>
+				<td><input type="number" name="age" th:value="${user.age}"/></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="right"><input type="submit" name="수정"/></td>
+				<td>주소</td>
+				<td><input type="text" name="addr" th:value="${user.addr}"/></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="right"><input type="submit" name="등록"/></td>
 			</tr>
 		</table>
 	</form>

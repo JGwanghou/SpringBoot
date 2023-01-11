@@ -37,6 +37,7 @@ public class User4Controller {
 	@PostMapping("/register")
 	public String register(User4VO vo) {
 		service.insertUser4(vo);
+		
 		return "redirect:/user4/list";
 	}
 	
