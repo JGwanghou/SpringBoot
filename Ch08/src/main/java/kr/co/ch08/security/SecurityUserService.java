@@ -26,7 +26,6 @@ public class SecurityUserService implements UserDetailsService{
 			throw new UsernameNotFoundException(username);
 		}
 		
-		
 		// 실질적으로 여기서 인증됨
 		UserDetails userDts = User.builder()
 								.username(user.getUid())
@@ -35,6 +34,4 @@ public class SecurityUserService implements UserDetailsService{
 								.build();
 		return userDts;
 	}
-
-	
 }
