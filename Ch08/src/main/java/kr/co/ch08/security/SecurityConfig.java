@@ -49,8 +49,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// 로그인 인증처리 서비스 등록
 		auth.userDetailsService(service).passwordEncoder(new BCryptPasswordEncoder());
 		
-		
-		
 	}
-	
 }
