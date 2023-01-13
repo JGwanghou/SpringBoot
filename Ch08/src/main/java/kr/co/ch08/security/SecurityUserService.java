@@ -19,22 +19,28 @@ public class SecurityUserService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// 스프링 시큐리티 인증 동작방식은 아이디/패스워드를 한번에 조회하는 방식이 아니다.
-		
 		// 아이디만 이용해서 사용자 정보를 로딩하고 나중에 패스워드를 검증하는 방식
 		User2VO user = repo.findById(username).get();
 		if(user == null) {
 			throw new UsernameNotFoundException(username);
 		}
+		// Security 기본 사용자 객체생성
+//		UserDetails userDts = User.builder()
+//								.username(user.getUid())
+//								.password(user.getPass())
+//								.roles("MEMBER")
+//								.build();
 		
-		
-		// 실질적으로 여기서 인증됨
-		UserDetails userDts = User.builder()
-								.username(user.getUid())
-								.password(user.getPass())
-								.roles("MEMBER")
+		// 빌드패턴..
+		UserDetails myUser = MyUserDetails.builder()
+								.uid(user.getUid())
+								.pass(user.getPass())
+								.name(user.getName())
+								.grade(user.getGrade())
+								.hp(user.getHp())
+								.age(user.getAge())
+								.rdate(user.getRdate())
 								.build();
-		return userDts;
+		return myUser;
 	}
-
-	
 }
