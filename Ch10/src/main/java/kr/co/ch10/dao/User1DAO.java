@@ -1,11 +1,11 @@
-package kr.co.ch09.dao;
+package kr.co.ch10.dao;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import kr.co.ch09.vo.User1VO;
+import kr.co.ch10.vo.User1VO;
 
 @Repository
 @Mapper
