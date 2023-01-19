@@ -28,6 +28,6 @@ public class SecurityUserService implements UserDetailsService{
 		UserDetails myUser = MyUserDetails.builder()
 								.user(user)
 								.build();
-		return myUser;
+		return myUser; //principal
 	}
 }
