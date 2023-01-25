@@ -6,6 +6,7 @@
 	<!-- 이 쿼리 수행되고 keyProperty: pk값 return -->
 	<insert id="insertArticle" useGeneratedKeys="true" keyProperty="no">
 		insert into `board_article` SET
+					`cate`=#{cate},
 					`title`=#{title},
 					`content`=#{content},
 					<if test="fname.isEmpty() == true">
@@ -14,7 +15,7 @@
 					<if test="fname.isEmpty() == false">
 						`file`=1,
 					</if>
-					`uid`=abcd,
+					`uid`='abcd',
 					`regip`=#{regip},
 					`rdate`= NOW();
 	</insert>
