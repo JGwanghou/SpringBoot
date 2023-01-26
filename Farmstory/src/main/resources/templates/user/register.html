@@ -1,5 +1,5 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="@{_header.html}"/>
+<th:block th:replace="~{/_header}"/>
 
         <main id="user" class="register">
 
@@ -78,5 +78,5 @@
                 </div>
             </form>            
         </main>
-<th:block th:include="@{_footer.html}"/>
+<th:block th:replace="~{/_footer}"/>
 </html>

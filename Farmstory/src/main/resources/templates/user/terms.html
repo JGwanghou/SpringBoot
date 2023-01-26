@@ -1,11 +1,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="@{_header.html}"/>
+<th:block th:replace="~{/_header}"/>
+
         <main id="user" class="terms">
             <table border="0">
                 <caption>사이트 이용약관</caption>
                 <tr>
                     <td>
-                        <textarea class="terms" readonly></textarea>
+                        <textarea class="terms" readonly th:text="${tvo.terms}"></textarea>
                         <label><input type="checkbox" id="check_1" class="terms" required />&nbsp;동의합니다.</label>
                     </td>
                 </tr>
@@ -15,7 +16,7 @@
                 <caption>개인정보 취급방침</caption>
                 <tr>
                     <td>
-                        <textarea class="privacy" readonly></textarea>
+                        <textarea class="privacy" readonly th:text="${tvo.privacy}"></textarea>
                         <label><input type="checkbox" id="check_2" class="privacy" required />&nbsp;동의합니다.</label>
                     </td>
                 </tr>
@@ -26,5 +27,5 @@
                 <a th:href="@{/user/register}" class="next">다음</a>
             </p>            
         </main>
-<th:block th:include="@{_footer.html}"/>
+<th:block th:replace="~{/_footer}"/>
 </html>

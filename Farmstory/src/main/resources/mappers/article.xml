@@ -35,13 +35,11 @@
 	</update>
 	
 	<update id="updateArticle">
-		update `board_article`
+		update `board_article` SET
 	</update>
 	
 	<select id="selectArticles" resultType="kr.co.farmstory.vo.ArticleVO">
-			select a.*, b.`nick` from `board_article` as a
-			join `board_user` as b
-			on a.uid = b.uid
+			select * from `board_article`
 			where `parent`=0
 			order by `no` desc
 			Limit #{start}, 10;
@@ -81,6 +79,9 @@
 			<result column="download" property="download"/>
 		</association>
 	</resultMap>
-	
+
+	<delete id="deleteArticle">
+		delete from `board_article` where `no`=#{no};
+	</delete>
 	
 </mapper>

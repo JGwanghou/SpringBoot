@@ -1,11 +1,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:include="@{_header.html}"/>
-<th:block th:include="@{/board/_croptalk.html}"/>
+<th:block th:replace="~{/_header}"/>
+<th:block th:replace="~{/board/__${group}__}"/>
         <main id="board" class="view">
             
             <table>
                 <caption>글보기</caption>
-                <!--/*
+
                 <tr>
                     <th>제목</th>
                     <td><input type="text" name="title" value="제목입니다." th:value="${article.title}"  readonly/></td>
@@ -21,12 +21,12 @@
                     <th>내용</th>
                     <td><textarea name="content" readonly>[[${article.content}]]</textarea></td>
                 </tr>
-                */-->
+
             </table>
 
             <div>
-                <a th:href="@{/board/delete}" class="btn btnRemove">삭제</a>
-                <a th:href="@{/board/modify}" class="btn btnModify">수정</a>
+                <a th:href="@{/board/delete(no=${article.no},group=__${group}__,cate=${cate})}" class="btn btnRemove">삭제</a>
+                <a th:href="@{/board/modify(no=${article.no},group=__${group}__,cate=${cate})}" class="btn btnModify">수정</a>
                 <a th:href="@{/board/list}" class="btn btnList">목록</a>
             </div>
 

@@ -8,7 +8,7 @@
                 <!--
             	<input type="hidden" name="uid" th:value="${#authentication.principal.user.uid}"/>
                 -->
-                <input type="hidden" name="group" th:value="${group}">
+                <input type="hidden" name="group" th:value="__${group}__">
                 <input type="hidden" name="cate" th:value="${cate}">
             	<input type="hidden" name="regip" th:value="${#authentication.details.remoteAddress}"/>
 
