@@ -50,17 +50,5 @@ public class UserController {
 		return "user/terms";
 	}
 	
-	@ResponseBody
-	@GetMapping("user/checkUid")
-	public Map<String, Integer> checkUid(@RequestParam("uid") String uid) { // 이 주소로 넘어오는 파라미터 기재
-		
-		log.info("uid : " + uid);
-		int result = service.countByUid(uid);
-		
-		
-		Map<String, Integer> resultMap = new HashMap<>();
-		resultMap.put("result", result);
-		
-		return resultMap;
-	}
+
 }

@@ -15,7 +15,7 @@
 					<if test="fname.isEmpty() == false">
 						`file`=1,
 					</if>
-					`uid`='abcd',
+					`uid`=#{uid},
 					`regip`=#{regip},
 					`rdate`= NOW();
 	</insert>
@@ -36,11 +36,16 @@
 	
 	<update id="updateArticle">
 		update `board_article` SET
+					`title`=#{title},
+					`content`=#{content},
+					`regip`=#{regip},
+					`rdate`= NOW()
+		WHERE `no`=#{no};
 	</update>
 	
 	<select id="selectArticles" resultType="kr.co.farmstory.vo.ArticleVO">
 			select * from `board_article`
-			where `parent`=0
+			where `parent`=0 AND `cate`=#{cate}
 			order by `no` desc
 			Limit #{start}, 10;
 	</select>

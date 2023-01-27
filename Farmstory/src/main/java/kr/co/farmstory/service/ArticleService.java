@@ -36,7 +36,6 @@ public class ArticleService {
 
     @Transactional
     public int insertArticle(ArticleVO vo) {
-
         // 글 등록
         int result = dao.insertArticle(vo);
 
@@ -47,7 +46,6 @@ public class ArticleService {
             // 파일 등록
             dao.insertFile(fvo);
         }
-
         return result;
     }
 
@@ -62,10 +60,9 @@ public class ArticleService {
     public ArticleVO selectArticle(int no) {
         return dao.selectArticle(no);
     }
+    public List<ArticleVO> selectArticles(String cate, int start) {
 
-    public List<ArticleVO> selectArticles(int start) {
-
-        return dao.selectArticles(start);
+        return dao.selectArticles(cate, start);
     }
     public int updateArticle(ArticleVO vo) {
 
@@ -75,7 +72,6 @@ public class ArticleService {
 
         return dao.deleteArticle(no);
     }
-
 
     @Value("${spring.servlet.multipart.location}")
     private String uploadPath;
@@ -153,7 +149,6 @@ public class ArticleService {
 
     // 마지막 페이지 번호
     public int getLastPageNum(int total) {
-
         int lastPage = 0;
 
         if(total % 10 == 0) {
@@ -165,7 +160,6 @@ public class ArticleService {
     }
 
     // 페이지 시작 번호(게시글)
-
     public int getPageStartNum(int total, int start) {
         return (int)total - start;
     }

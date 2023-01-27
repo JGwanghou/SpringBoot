@@ -21,15 +21,13 @@ public class SecurityConfig {
 		// 인가(접근권한) 설정
 		http.authorizeHttpRequests().antMatchers("/").permitAll(); // 모든 자원에 대해서 모든 사용자 접근 허용
 		
-		
 		// 사이트 위변조 요청 방지
 		http.csrf().disable();
 
-		/*
 		// 로그인 설정
 		http.formLogin()
 		.loginPage("/user/login")
-		.defaultSuccessUrl("/list") // 로그인 성공 시 이동할 페이지
+		.defaultSuccessUrl("/index") // 로그인 성공 시 이동할 페이지
 		.failureUrl("/user/login?success=100")  // 로그인 실패 시 이동할 페이지
 		.usernameParameter("uid")
 		.passwordParameter("pass");
@@ -39,12 +37,12 @@ public class SecurityConfig {
 		.invalidateHttpSession(true) // 세션 삭제
 		.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout")) // 로그아웃 처리할 URL
 		.logoutSuccessUrl("/user/login?success=200"); // 로그아웃 성공 시 이동 할 페이지
-		*/
+
+		http.userDetailsService(service);
+
 		return http.build();
 	}
 
-
-	
 	@Bean
     public PasswordEncoder PasswordEncoder () {
         //return new MessageDigestPasswordEncoder("SHA-256");

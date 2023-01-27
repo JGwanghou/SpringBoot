@@ -1,9 +1,12 @@
 package kr.co.farmstory.controller;
 
+import kr.co.farmstory.Entity.UserEntity;
+import kr.co.farmstory.security.MyUserDetails;
 import kr.co.farmstory.service.ArticleService;
 import kr.co.farmstory.vo.ArticleVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +34,7 @@ public class BoardController {
         int pageStartNum = service.getPageStartNum(total, start);
         int groups[] = service.getPageGroup(currentPage, lastPage);
 
-        List<ArticleVO> articles = service.selectArticles(start);
+        List<ArticleVO> articles = service.selectArticles(cate, start);
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("lastPage", lastPage);
@@ -55,15 +58,16 @@ public class BoardController {
     @PostMapping("board/modify")
     public String modify(String group, ArticleVO vo) {
         int result = service.updateArticle(vo);
-
-        return "redirect:/board/view?group="+group+"&cate"+vo.getCate();
+        log.info("result : "+result);
+        return "redirect:/board/list?group="+group+"&cate="+vo.getCate();
     }
 
     @GetMapping("board/view")
-    public String view(Model model,String group, String cate, String pg, int no){
-
+    public String view(@AuthenticationPrincipal MyUserDetails myUser, Model model,String group, String cate, String pg, int no){
+        UserEntity user = myUser.getUser();
         ArticleVO article = service.selectArticle(no);
 
+        model.addAttribute("user", user);
         model.addAttribute("article", article);
         model.addAttribute("group", group);
         model.addAttribute("cate", cate);
@@ -71,8 +75,9 @@ public class BoardController {
         return "board/view";
     }
     @GetMapping("board/write")
-    public String write(Model model, String group, String cate){
-
+    public String write(@AuthenticationPrincipal MyUserDetails myUser, Model model, String group, String cate){
+        UserEntity user = myUser.getUser();
+        model.addAttribute("user", user);
         model.addAttribute("group", group);
         model.addAttribute("cate", cate);
 
