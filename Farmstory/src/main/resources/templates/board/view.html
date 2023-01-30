@@ -2,11 +2,40 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:replace="~{/_header}"/>
 <th:block th:replace="~{/board/__${group}__}"/>
+<script th:src="@{/js/viewComment.js}"></script>
         <main id="board" class="view">
-            
+            <script>
+                $(function(){
+                    let textarea = $('form > textarea')
+
+                    let jsonData = {};
+                    jsonData.regip = $('input[name=regip']).val();
+                    jsonData.uid = $('input[name=uid]').val();
+                    jsonData.parent = $('input[name=parent]').val();
+                    jsonData.comment = textarea.text();
+
+                    let jsonStr = JSON.stringfy(jsonData);
+
+                        $.ajax({
+                            url:'/Farmstory/board/writeComment',
+                            method:'post',
+                            data:jsonData,
+                            dataType:'json',
+                            success : function(data){
+                                if(data.result == 1){
+                                    alert('댓글완료')
+                                }else{
+                                    alert('댓글실패')
+                                }
+                            }
+
+                        })
+                })
+            </script>
+
             <table>
                 <caption>글보기</caption>
-
+                <input type="hidden" name="no" th:value="${article.no}">
                 <tr>
                     <th>제목</th>
                     <td><input type="text" name="title" value="제목입니다." th:value="${article.title}"  readonly/></td>
@@ -50,10 +79,13 @@
             <section class="commentForm">
                 <h3>댓글쓰기</h3>
                 <form action="#">
-                    <textarea name="content" placeholder="댓글내용 입력"></textarea>
+                    <textarea name="comment" placeholder="댓글내용 입력"></textarea>
+                    <input type="hidden" name="regip" th:value="${#authentication.details.remoteAddress}"/>
+                    <input type="hidden" name="uid" th:value="${user.uid}"/>
+                    <input type="text" name="parent" th:value="${article.no}"/>
                     <div>
                         <a href="#" class="btn btnCancel">취소</a>
-                        <input type="submit" class="btn btnComplete" value="작성완료"/>
+                        <input type="submit" class="btn btnComplete" id="btnComplete" value="작성완료"/>
                     </div>
                 </form>
             </section>

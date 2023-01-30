@@ -9,8 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 @ToString
 @Builder
 public class ArticleVO {
-    private int no;
-    private int parent;
+    private Integer no;
+    private Integer parent;
     private int comment;
     private String cate;
     private String title;

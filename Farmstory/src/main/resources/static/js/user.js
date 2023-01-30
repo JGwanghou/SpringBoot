@@ -29,7 +29,7 @@ $(function(){
 		window.onload = function(){
 
 			const btnCheckUid = document.getElementById('btnCheckUid');
-
+            const resultUid = document.querySelector('.resultUid');
 			/*====== 아이디 중복체크 및 정규표현식 검사 ======== */
 			btnCheckUid.addEventListener('click', ()=>{
 
@@ -39,13 +39,10 @@ $(function(){
 				// 만약 입력한 아이디정보가 정규표현식과 맞지않다!
 				if(!reUid.test(uid)){
 
-					const resultUid = document.querySelector('.resultUid');
 					resultUid.innerText = '아이디 형식에 맞지 않습니다.';
 					resultUid.style.color = "red";
 
 					isUidOk = false;
-
-					return
 				// 여기까지 정규표현식에 맞는지 안 맞는지
 				}else{
 					// AJAX 전송
@@ -60,7 +57,7 @@ $(function(){
 								const data = xhr.response;
 								console.log(data);
 
-								const resultUid = document.querySelector('.resultUid');
+
 								if(data.result == 1){
 									resultUid.innerText = '이미 사용중인 아이디 입니다.';
 									resultUid.style.color = "red";
