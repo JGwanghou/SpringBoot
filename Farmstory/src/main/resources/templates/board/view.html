@@ -5,32 +5,7 @@
 <script th:src="@{/js/viewComment.js}"></script>
         <main id="board" class="view">
             <script>
-                $(function(){
-                    let textarea = $('form > textarea')
 
-                    let jsonData = {};
-                    jsonData.regip = $('input[name=regip']).val();
-                    jsonData.uid = $('input[name=uid]').val();
-                    jsonData.parent = $('input[name=parent]').val();
-                    jsonData.comment = textarea.text();
-
-                    let jsonStr = JSON.stringfy(jsonData);
-
-                        $.ajax({
-                            url:'/Farmstory/board/writeComment',
-                            method:'post',
-                            data:jsonData,
-                            dataType:'json',
-                            success : function(data){
-                                if(data.result == 1){
-                                    alert('댓글완료')
-                                }else{
-                                    alert('댓글실패')
-                                }
-                            }
-
-                        })
-                })
             </script>
 
             <table>

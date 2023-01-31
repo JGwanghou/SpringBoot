@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.farmstory.dao.ArticleDAO">
+	<!-- 이 쿼리 수행되고 keyProperty: pk값 return -->
+	<insert id="insertComment" useGeneratedKeys="true" keyProperty="no">
+		insert into `board_comment` SET
+			`parent`=#{parent},
+			`comment`=#{comment},
+			`uid`=#{uid},
+			`nick`=#{nick},
+			`regip`=#{regip},
+			`rdate`=NOW();
+	</insert>
+
+</mapper>
