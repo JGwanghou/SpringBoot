@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.Map;
 @Slf4j
@@ -41,7 +43,9 @@ public class UserController {
     public String register(){return "user/register";}
 
     @PostMapping("user/register")
-    public String register(UserVO vo){
+    public String register(HttpServletRequest req, UserVO vo){
+        vo.setRegip(req.getRemoteAddr());
+
         service.insertUser(vo);
         return "redirect:/user/login";
     }

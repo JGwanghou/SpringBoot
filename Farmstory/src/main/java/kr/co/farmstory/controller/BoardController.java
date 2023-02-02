@@ -3,7 +3,9 @@ package kr.co.farmstory.controller;
 import kr.co.farmstory.Entity.UserEntity;
 import kr.co.farmstory.security.MyUserDetails;
 import kr.co.farmstory.service.ArticleService;
+import kr.co.farmstory.service.CommentService;
 import kr.co.farmstory.vo.ArticleVO;
+import kr.co.farmstory.vo.CommentVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -20,6 +22,8 @@ public class BoardController {
 
     @Autowired
     private ArticleService service;
+    @Autowired
+    private CommentService cmtservice;
 
     @GetMapping("board/list")
     public String list(Model model, String group, String cate, String pg){
@@ -70,6 +74,9 @@ public class BoardController {
         model.addAttribute("group", group);
         model.addAttribute("cate", cate);
         model.addAttribute("pg", pg);
+
+        CommentVO cmt = cmtservice.selectComment(no);
+        model.addAttribute("cmt", cmt);
         return "board/view";
     }
     @GetMapping("board/write")

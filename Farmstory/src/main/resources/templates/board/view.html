@@ -4,9 +4,7 @@
 <th:block th:replace="~{/board/__${group}__}"/>
 <script th:src="@{/js/viewComment.js}"></script>
         <main id="board" class="view">
-            <script>
 
-            </script>
 
             <table>
                 <caption>글보기</caption>
@@ -38,10 +36,10 @@
             <!-- 댓글목록 -->
             <section class="commentList">
                 <h3>댓글목록</h3>
-                <article>
-                    <span class="nick">길동이</span>
-                    <span class="date">20-05-13</span>                    
-                    <p class="content">댓글 샘플입니다.</p>
+                <article th:each="comment : ${cmt}">
+                    <span class="nick">[[${comment.uid}]]</span>
+                    <span class="date">[[${comment.rdate}]]</span>
+                    <p class="content">[[${comment.comment}]]</p>
                     <div>
                         <a href="#" class="remove">삭제</a>
                         <a href="#" class="modify">수정</a>
@@ -53,16 +51,14 @@
             <!-- 댓글쓰기 -->
             <section class="commentForm">
                 <h3>댓글쓰기</h3>
-                <form action="#">
-                    <textarea name="comment" placeholder="댓글내용 입력"></textarea>
+                    <textarea id="comment" name="comment" placeholder="댓글내용 입력"></textarea>
                     <input type="hidden" name="regip" th:value="${#authentication.details.remoteAddress}"/>
                     <input type="hidden" name="uid" th:value="${user.uid}"/>
                     <input type="text" name="parent" th:value="${article.no}"/>
                     <div>
                         <a href="#" class="btn btnCancel">취소</a>
-                        <input type="submit" class="btn btnComplete" id="btnComplete" value="작성완료"/>
+                        <input type="button" id="btnComplete" class="btn btnComplete" value="작성완료"/>
                     </div>
-                </form>
             </section>
         </main>
 </article>
