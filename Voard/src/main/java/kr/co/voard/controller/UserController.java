@@ -1,14 +1,19 @@
 package kr.co.voard.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,6 +36,14 @@ public class UserController {
 	private SecurityUserService securityUserService;
 	private JwtUtill jwtUtill;
 	
+	@GetMapping("/user")
+	public UserEntity user(Authentication authentication) {
+		
+		MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
+		
+		return myUserDetails.getUser();
+	}
+	
 	@PostMapping("/user/login")
 	public Map<String, Object> login(@RequestBody UserVO vo) {
 		log.info(" vo : " + vo);
@@ -39,8 +52,10 @@ public class UserController {
 		String pass = vo.getPass();
 		
 		log.info("login...1");
+		
 		// Security 인증처리
 		MyUserDetails myUserDetails =  securityUserService.loadUserByUsername(uid);
+		
 		log.info("login...2");
 		Authentication authentication = authenticationManager.
 											authenticate(new UsernamePasswordAuthenticationToken(myUserDetails, pass));
