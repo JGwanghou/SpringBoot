@@ -20,8 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.voard.entity.UserEntity;
 import kr.co.voard.jwt.JwtUtill;
+import kr.co.voard.repository.UserRepo;
 import kr.co.voard.security.MyUserDetails;
 import kr.co.voard.security.SecurityUserService;
+import kr.co.voard.service.UserService;
+import kr.co.voard.vo.TermsVO;
 import kr.co.voard.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +38,23 @@ public class UserController {
 	private AuthenticationManager authenticationManager;
 	private SecurityUserService securityUserService;
 	private JwtUtill jwtUtill;
+	private UserService service;
+	private UserRepo repo;
+	
+	@GetMapping("/user/terms")
+	public TermsVO terms() {
+		return service.selectTerms();
+	}
+	
+	@GetMapping("/user/checkUid")
+	public int checkUid(String uid) {
+		return service.countUid(uid);
+	}
+	
+	@PostMapping("/user/register")
+	public void register(@RequestBody UserVO user) {
+		service.insertUser(user);
+	}
 	
 	@GetMapping("/user")
 	public UserEntity user(Authentication authentication) {
@@ -45,6 +65,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/login")
+	@CrossOrigin(origins = "*", allowedHeaders = "*")
 	public Map<String, Object> login(@RequestBody UserVO vo) {
 		log.info(" vo : " + vo);
 		
